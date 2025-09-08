@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-family: sans-serif;
+        }
+
+        #loginForm {
+            padding: 1rem;
+            background-color: rgb(231, 231, 231);
+            border-radius: .5rem;
+            width: 300px;
+        }
+
+        .ContentPassword {
+            position: relative;
+        }
+
+        .ContentPassword img {
+            position: absolute;
+            right: 5px;
+            top: 30px;
+            cursor: pointer;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Login</h2>
+
+    <form id="loginForm">
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" required /><br /><br />
+
+        <label for="name">Nome:</label><br />
+        <input type="text" id="name" placeholder="(apenas para criar)" /><br /><br />
+
+        <div class="ContentPassword">
+            <label for="password">Senha:</label><br />
+            <input type="password" id="password" required />
+            <img src="./img/image.png" width="20px" alt="" id="img" />
+        </div>
+
+        <select name="" id="role">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+        </select>
+
+        <div class="btns">
+            <button type="button" id="registerBtn">Criar</button>
+        </div>
+    </form>
+
+    <p id="error" style="color: red;"></p>
+
+    <script type="module" src="./js/outros.js">
+
+    </script>
+</body>
+
+</html>

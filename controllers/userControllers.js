@@ -1,7 +1,8 @@
-import prisma from "../src/config/db.js";
+import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+const prisma = new PrismaClient
 
 export const createUser = async (req, res) => {
   try {
@@ -19,7 +20,6 @@ export const createUser = async (req, res) => {
   }
 };
 
-
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
 
@@ -30,12 +30,11 @@ export const loginUser = async (req, res) => {
   if (!valid) return res.status(401).json({ error: "Credenciais inválidas" });
 
   const token = jwt.sign({ id: user.id, role: user.role }, "SECRET_KEY", {
-    expiresIn: "1h",
+    expiresIn: "7d",
   });
 
   res.json({ token });
 };
-
 
 export const getUsers = async (req, res) => {
   const users = await prisma.user.findMany();
@@ -49,22 +48,20 @@ export const getUserById = async (req, res) => {
   res.json(user);
 };
 
-
 export const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, role } = req.body;
+  const { name } = req.body;
 
   try {
     const user = await prisma.user.update({
       where: { id: Number(id) },
-      data: { name, email, role },
+      data: { name },
     });
     res.json(user);
   } catch {
     res.status(404).json({ error: "Usuário não encontrado" });
   }
 };
-
 
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
